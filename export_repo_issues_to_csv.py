@@ -84,8 +84,8 @@ def create_blocked_items(issues):
     fix_blockers = dict()
 
     for issue in issues:
-        if issue['title'].startswith('Fix')and issue['state'] != 'closed':
-            #print(f"Do not skip {issue['number']} dependency...")
+        if (issue['title'].startswith('Fix') or \
+            issue['title'].startswith('Placeholder')) and issue['state'] != 'closed':
             fix_blockers[issue['number']] = AttrDict(
                 issue_number=issue['number']
             )
