@@ -282,9 +282,10 @@ def calculate_status(issue, pipeline):
     if issue['state'] == 'closed':
         status = 'Deployed'
         return status
+    milestone = None
     if issue['milestone']:
         milestone = issue['milestone'].get('due_on', now.strftime('%Y-%m-%dT%H:%M:%SZ'))
-    else:
+    if not milestone:
         milestone = now.strftime('%Y-%m-%dT%H:%M:%SZ')
     #if the issue is not due within this sprint or earlier, ignore dependencies
     if datetime.datetime.strptime(milestone, '%Y-%m-%dT%H:%M:%SZ') \
